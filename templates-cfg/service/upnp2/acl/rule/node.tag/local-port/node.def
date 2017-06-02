@@ -1,0 +1,8 @@
+type: txt
+
+help: Local port number or range
+
+default: "0-65535"
+
+val_help: u32:0-65535; Numbered port
+val_help: range; Numbered port range (e.g. 0-65535 default)

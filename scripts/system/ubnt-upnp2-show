@@ -1,0 +1,8 @@
+#!/bin/bash
+echo Firewall pin holes
+sudo iptables -vnL MINIUPNPD | grep -v MINIUPNPD
+echo
+echo NAT port forwards
+sudo iptables -vnL MINIUPNPD -t nat | grep -v MINIUPNPD
+sudo iptables -vnL MINIUPNPD-POSTROUTING -t nat | grep -v MINIUPNPD
+

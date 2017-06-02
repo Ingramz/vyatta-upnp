@@ -1,0 +1,4 @@
+type: txt
+help: Outbound interface [REQUIRED]
+allowed: /opt/vyatta/sbin/vyatta-interfaces.pl --show=all
+

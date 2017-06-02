@@ -1,0 +1,12 @@
+type: txt
+
+help: Option to enable/disable NAT Port Mapping Protocol
+
+allowed: echo enable disable
+
+syntax:expression: $VAR(@) in "enable", "disable"; "NAT-PMP must be enable or disable"
+
+default: "disable"
+
+val_help: enable; Enable NAT Port Mapping Protocol
+val_help: disable; Disable NAT Port Mapping Protocol (default)

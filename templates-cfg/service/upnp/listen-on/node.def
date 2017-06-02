@@ -1,0 +1,19 @@
+tag:
+
+priority: 921
+
+type: txt
+
+help: Listen on interface [REQUIRED]
+
+allowed: /usr/sbin/ubnt-ifctl list-sys-intfs all
+
+commit:expression: $VAR(outbound-interface/) != ""; 
+                   "outbound-interface must be specified"
+
+end: if [ ${COMMIT_ACTION} = 'DELETE' ]; then
+         sudo /opt/vyatta/sbin/upnp-interface-config.pl --stop --dev=$VAR(@); 
+     else
+         sudo /opt/vyatta/sbin/upnp-interface-config.pl --update --dev=$VAR(@);
+     fi;
+

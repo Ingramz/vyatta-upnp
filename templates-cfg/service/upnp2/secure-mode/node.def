@@ -1,0 +1,12 @@
+type: txt
+
+help: Option to enable/disable UPnP secure mode
+
+allowed: echo enable disable
+
+syntax:expression: $VAR(@) in "enable", "disable"; "Secure mode must be enable or disable"
+
+default: "disable"
+
+val_help: enable; Enable UPnP secure mode
+val_help: disable; Disable UPnP secure mode (default)

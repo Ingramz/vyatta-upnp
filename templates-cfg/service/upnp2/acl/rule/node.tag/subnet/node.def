@@ -1,0 +1,5 @@
+type: ipv4net
+
+help: Subnet for acl rule
+
+val_help: ipv4net; Subnet to match

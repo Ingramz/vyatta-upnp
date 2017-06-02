@@ -1,0 +1,7 @@
+type: u32
+
+help: Downstream bit rate
+val_help: u32:1-1000000000; Downstream bit rate reported by UPnP in bits per second
+
+syntax:expression: $VAR(@) > 0 && $VAR(@) <= 1000000000 ; \
+"Bit rate must be in range 1 to 1000000000"

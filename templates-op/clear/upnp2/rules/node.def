@@ -1,0 +1,2 @@
+help: Clear UPnP firewall and NAT port forwards
+run: /opt/vyatta/sbin/ubnt-upnp2-clear

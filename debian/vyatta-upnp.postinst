@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# remove init of daemons that are controlled by Vyatta configuration process
+
+update-rc.d -f linux-igd remove >/dev/null
+update-rc.d -f miniupnpd remove >/dev/null

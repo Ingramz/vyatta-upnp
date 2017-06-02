@@ -1,0 +1,7 @@
+multi:
+
+type: txt
+
+help: Listen on interface [REQUIRED]
+
+allowed: /usr/sbin/ubnt-ifctl list-sys-intfs all
