@@ -161,17 +161,11 @@ sub read_config {
     my $uuid = read_uuid();
     $output .= "uuid=$uuid\n";
 
-    $output .= "manufacturer_name=Ubiquiti Networks, Inc.\n";
-    $output .= "manufacturer_url=http=http://www.ubnt.com\n";
-
-    my $plat = `/usr/sbin/ubnt-hal getBoardShortName`;
-    $output .= "friendly_name=$plat\n";
-
-    my $model = `/usr/sbin/ubnt-hal getBoardId`;
-    $output .= "model_number=$model\n";
-
-    my $serial = `/usr/sbin/ubnt-hal getBoardSerial`;
-    $output .= "serial=$serial\n";
+    $output .= "manufacturer_name=VyOS\n";
+    $output .= "manufacturer_url=http=https://vyos.io\n";
+    $output .= "friendly_name=VyOS router\n";
+    $output .= "model_number=1\n";
+    $output .= "serial=1234567890\n";
 
     $output .= "lease_file=$lease_file\n";
 

@@ -2,4 +2,4 @@ type: txt
 
 help: Out bound WAN interface [REQUIRED]
 
-allowed: /usr/sbin/ubnt-ifctl list-sys-intfs all
+allowed: /opt/vyatta/sbin/vyatta-interfaces.pl --show=all

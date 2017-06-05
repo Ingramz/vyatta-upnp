@@ -4,4 +4,4 @@ type: txt
 
 help: Listen on interface [REQUIRED]
 
-allowed: /usr/sbin/ubnt-ifctl list-sys-intfs all
+allowed: /opt/vyatta/sbin/vyatta-interfaces.pl --show=all
