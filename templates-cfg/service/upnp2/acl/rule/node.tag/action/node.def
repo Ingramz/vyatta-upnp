@@ -9,4 +9,3 @@ allowed: echo "allow deny"
 
 val_help: allow   ; Rule action to allow
 val_help: deny    ; Rule action to deny
-

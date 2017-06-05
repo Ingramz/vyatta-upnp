@@ -1,4 +1,4 @@
-type:  u32 
+type:  u32
 
 help: Port for UPnP service
 

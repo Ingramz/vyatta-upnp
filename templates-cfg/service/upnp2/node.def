@@ -9,4 +9,3 @@ end: if [ ${COMMIT_ACTION} = 'DELETE' ]; then
      else
          sudo /opt/vyatta/sbin/ubnt-upnp2.pl --update ;
      fi;
-

@@ -25,7 +25,7 @@ sub flush_chains {
 
 sub restart_daemon {
     my $conf = shift;
-    
+
     stop_daemon();
     my $cmd = "start-stop-daemon -q --start --exec \"/usr/sbin/miniupnpd\""
         . " -- -f $config_file -P $pid_file";
@@ -102,7 +102,7 @@ sub validate_port {
 sub read_config {
     my $output .= "enable_upnp=yes\n";
 
-    my $config = new Vyatta::Config;    
+    my $config = new Vyatta::Config;
     my $path = 'service upnp2';
     $config->setLevel($path);
     my $wan = $config->returnValue('wan');
@@ -183,12 +183,12 @@ sub read_config {
         my $action = $config->returnValue('action');
         if (!defined $action) {
             print "Error: must define an action for acl rule $rule\n";
-            exit 1;            
+            exit 1;
         }
         my $subnet = $config->returnValue('subnet');
         if (!defined $subnet) {
             print "Error: must define an subnet for acl rule $rule\n";
-            exit 1;            
+            exit 1;
         }
         my $eport = $config->returnValue('external-port');
         if (!defined $eport) {
@@ -216,7 +216,7 @@ sub is_same_as_file {
     open my $MF, '+<', \$mem_file or die "couldn't open memfile $!\n";
     print $MF $value;
     seek($MF, 0, 0);
-    
+
     my $rc = compare($file, $MF);
     return 1 if $rc == 0;
     return;

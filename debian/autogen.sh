@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 rm -rf config
 rm -f aclocal.m4 config.guess config.statusconfig.sub configure INSTALL
 

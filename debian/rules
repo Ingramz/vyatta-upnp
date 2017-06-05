@@ -62,12 +62,12 @@ clean-patched:
 	rm -f config.status config.sub config.guess config.log
 	rm -f aclocal.m4 configure Makefile.in Makefile INSTALL
 	rm -rf config
-	dh_clean 
+	dh_clean
 
 install: build
 	dh_testdir
 	dh_testroot
-	dh_clean -k 
+	dh_clean -k
 	dh_installdirs
 
 	$(MAKE) DESTDIR=$(PKGDIR) install
@@ -83,7 +83,7 @@ binary-indep: build install
 	dh_installchangelogs ChangeLog
 	dh_installdocs
 	dh_install
-	dh_installdebconf	
+	dh_installdebconf
 	dh_link
 	dh_strip
 	dh_compress
@@ -103,4 +103,4 @@ binary-arch: build install
 # so; we have nothing to do by default.
 
 binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install 
+.PHONY: build clean binary-indep binary-arch binary install
