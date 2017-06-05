@@ -161,13 +161,13 @@ sub read_config {
     my $uuid = read_uuid();
     $output .= "uuid=$uuid\n";
 
-    $output .= "manufacturer_name=VyOS\n";
-    $output .= "manufacturer_url=http=https://vyos.io\n";
-    $output .= "friendly_name=VyOS router\n";
+#    $output .= "manufacturer_name=VyOS\n";
+#    $output .= "manufacturer_url=https://vyos.io\n";
+#    $output .= "friendly_name=VyOS router\n";
     $output .= "model_number=1\n";
     $output .= "serial=1234567890\n";
 
-    $output .= "lease_file=$lease_file\n";
+#    $output .= "lease_file=$lease_file\n";
 
     $path .= " acl rule";
     $config->setLevel($path);
