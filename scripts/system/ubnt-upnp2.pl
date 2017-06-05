@@ -246,16 +246,16 @@ if ($update) {
     flush_chains();
     my $output = read_config();
     write_file($config_file, $output);
-	restart_daemon($config_file);
-	exit 0;
+    restart_daemon($config_file);
+    exit 0;
 }
 
 if ($stop) {
     flush_chains();
     reset_iptables();
-	stop_daemon();
+    stop_daemon();
     unlink $config_file;
-	exit 0;
+    exit 0;
 }
 
 exit 1;
