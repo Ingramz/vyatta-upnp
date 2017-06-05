@@ -1,3 +1,4 @@
-#!/bin/bash
+#!/bin/sh
+
 sudo iptables -F MINIUPNPD
 sudo iptables -F MINIUPNPD -t nat
