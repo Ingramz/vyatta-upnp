@@ -2,12 +2,11 @@ Source: vyatta-upnp
 Section: contrib/net
 Priority: extra
 Maintainer: Kiall Mac Innes <kiall@managedit.ie>
-Build-Depends: debhelper (>= 5), autotools-dev
-Standards-Version: 3.7.2
+Standards-Version: 3.9.6
+Build-Depends: debhelper (>= 5), automake
 
 Package: vyatta-upnp
 Architecture: all
-Depends: miniupnpd (>= 1.8),
- vyatta-cfg (>= 0.15.33)
+Depends: miniupnpd, vyatta-cfg
 Description: Vyatta UPnP configuration templates and scripts
  Vyatta UPnP configuration templates and scripts.

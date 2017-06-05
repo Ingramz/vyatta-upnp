@@ -88,8 +88,8 @@ binary-indep: build install
 	dh_compress
 	dh_fixperms
 	dh_installdeb
-	if [ -n "$$UBNT_DEV_PKG_VERSION" ]; then \
-		dh_gencontrol -- "-v$$UBNT_DEV_PKG_VERSION"; \
+	if [ -f "../.VYOS_DEV_BUILD" ]; then \
+		dh_gencontrol -- -v999.dev; \
 	else \
 		dh_gencontrol; \
 	fi
