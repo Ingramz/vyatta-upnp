@@ -33,8 +33,7 @@ sub restart_daemon {
 }
 
 sub stop_daemon {
-    my $cmd = "start-stop-daemon -q --stop --oknodo --pidfile $pid_file";
-    system($cmd);
+    system("start-stop-daemon -q --stop --oknodo --pidfile $pid_file");
 }
 
 sub read_uuid {
@@ -52,29 +51,17 @@ sub read_uuid {
 sub change_iptables {
     my $wan = shift;
 
-    my $cmd;
-    $cmd = "sudo iptables -t mangle -R PREROUTING 1 -i $wan -j $upnp_chain";
-    system($cmd);
-    $cmd = "sudo iptables -t nat -R PREROUTING 1 -i $wan -j $upnp_chain";
-    system($cmd);
-    $cmd = "sudo iptables -t nat -R POSTROUTING 2 -o $wan "
-        . "-j $upnp_chain-POSTROUTING";
-    system($cmd);
-    $cmd = "sudo iptables -t filter -R FORWARD 1 -i $wan ! -o $wan "
-        . "-j $upnp_chain";
-    system($cmd);
+    system("sudo iptables -t mangle -R PREROUTING 1 -i $wan -j $upnp_chain");
+    system("sudo iptables -t nat -R PREROUTING 1 -i $wan -j $upnp_chain");
+    system("sudo iptables -t nat -R POSTROUTING 2 -o $wan -j $upnp_chain-POSTROUTING");
+    system("sudo iptables -t filter -R FORWARD 1 -i $wan ! -o $wan -j $upnp_chain");
 }
 
 sub reset_iptables {
-    my $cmd;
-    $cmd = "sudo iptables -t mangle -R PREROUTING 1 -j $upnp_chain";
-    system($cmd);
-    $cmd = "sudo iptables -t nat -R PREROUTING 1 -j $upnp_chain";
-    system($cmd);
-    $cmd = "sudo iptables -t nat -R POSTROUTING 2 -j $upnp_chain-POSTROUTING";
-    system($cmd);
-    $cmd = "sudo iptables -t filter -R FORWARD 1 -j $upnp_chain";
-    system($cmd);
+    system("sudo iptables -t mangle -R PREROUTING 1 -j $upnp_chain");
+    system("sudo iptables -t nat -R PREROUTING 1 -j $upnp_chain");
+    system("sudo iptables -t nat -R POSTROUTING 2 -j $upnp_chain-POSTROUTING");
+    system("sudo iptables -t filter -R FORWARD 1 -j $upnp_chain");
 }
 
 sub validate_port {
