@@ -92,11 +92,7 @@ sub read_config {
         print "Error: must define a WAN interface\n";
         exit 1;
     }
-    my $owan = $config->returnOrigValue('wan');
-    $owan = '' if ! defined $owan;
-    if ($wan ne $owan) {
-        setup_iptables($wan);
-    }
+    setup_iptables($wan);
 
     my $natpmp = $config->returnValue('nat-pmp');
     if (!defined $natpmp or $natpmp eq '') {
