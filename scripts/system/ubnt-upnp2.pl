@@ -17,10 +17,21 @@ my $pid_file = '/var/run/miniupnpd.pid';
 my $uuid_file = '/config/user-data/uuid';
 my $lease_file = '/var/log/upnp.leases';
 
-sub flush_chains {
-    system("sudo iptables -F $upnp_chain; sudo iptables -t nat -F $upnp_chain");
-    system("sudo iptables -t nat -F $upnp_chain-POSTROUTING");
-    system("sudo iptables -t mangle -F $upnp_chain");
+sub clear_iptables {
+    system("iptables-save | grep -v $upnp_chain | iptables-restore");
+}
+
+sub setup_iptables {
+    my $wan = shift;
+
+    system("iptables -t nat -N $upnp_chain");
+    system("iptables -t nat -A PREROUTING -i $wan -j $upnp_chain");
+    system("iptables -t mangle -N $upnp_chain");
+    system("iptables -t mangle -A PREROUTING -i $wan -j $upnp_chain");
+    system("iptables -t filter -N $upnp_chain");
+    system("iptables -t filter -A FORWARD -i $wan ! -o $wan -j $upnp_chain");
+    system("iptables -t nat -N $upnp_chain-POSTROUTING");
+    system("iptables -t nat -A POSTROUTING -o $wan -j $upnp_chain-POSTROUTING");
 }
 
 sub restart_daemon {
@@ -39,29 +50,13 @@ sub stop_daemon {
 sub read_uuid {
     my $uuid;
     if (! -e $uuid_file) {
-        system("sudo uuidgen -r > $uuid_file");
+        system("uuidgen -r > $uuid_file");
     }
     open(my $FILE, '<', $uuid_file) or die "Error: read $!";
     $uuid = <$FILE>;
     close($FILE);
     chomp $uuid;
     return $uuid;
-}
-
-sub change_iptables {
-    my $wan = shift;
-
-    system("sudo iptables -t mangle -R PREROUTING 1 -i $wan -j $upnp_chain");
-    system("sudo iptables -t nat -R PREROUTING 1 -i $wan -j $upnp_chain");
-    system("sudo iptables -t nat -R POSTROUTING 2 -o $wan -j $upnp_chain-POSTROUTING");
-    system("sudo iptables -t filter -R FORWARD 1 -i $wan ! -o $wan -j $upnp_chain");
-}
-
-sub reset_iptables {
-    system("sudo iptables -t mangle -R PREROUTING 1 -j $upnp_chain");
-    system("sudo iptables -t nat -R PREROUTING 1 -j $upnp_chain");
-    system("sudo iptables -t nat -R POSTROUTING 2 -j $upnp_chain-POSTROUTING");
-    system("sudo iptables -t filter -R FORWARD 1 -j $upnp_chain");
 }
 
 sub validate_port {
@@ -100,7 +95,7 @@ sub read_config {
     my $owan = $config->returnOrigValue('wan');
     $owan = '' if ! defined $owan;
     if ($wan ne $owan) {
-        change_iptables($wan);
+        setup_iptables($wan);
     }
 
     my $natpmp = $config->returnValue('nat-pmp');
@@ -224,7 +219,7 @@ GetOptions(
 );
 
 if ($update) {
-    flush_chains();
+    clear_iptables();
     my $output = read_config();
     write_file($config_file, $output);
     restart_daemon($config_file);
@@ -232,8 +227,7 @@ if ($update) {
 }
 
 if ($stop) {
-    flush_chains();
-    reset_iptables();
+    clear_iptables();
     stop_daemon();
     unlink $config_file;
     exit 0;

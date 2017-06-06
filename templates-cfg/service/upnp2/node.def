@@ -2,8 +2,6 @@ priority: 999
 
 help: UPnP Internet Gateway Device (IGD)
 
-create: sudo /opt/vyatta/sbin/firewall.init start
-
 end: if [ ${COMMIT_ACTION} = 'DELETE' ]; then
          sudo /opt/vyatta/sbin/ubnt-upnp2.pl --stop ;
      else
